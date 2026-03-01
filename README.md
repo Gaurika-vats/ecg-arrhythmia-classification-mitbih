@@ -5,10 +5,10 @@ This project implements an end-to-end deep learning pipeline for automated heart
 
 ## Dataset
 The dataset used is the MIT-BIH Arrhythmia Dataset from PhysioNet.
-**Source:** PhysioNet
-**Records:** 48 half-hour two-channel ambulatory ECG recordings
-**Sampling Frequency:** 360 Hz
-**Annotations:** Beat-level annotation provided by cardiologists
+- **Source:** PhysioNet
+- **Records:** 48 half-hour two-channel ambulatory ECG recordings
+- **Sampling Frequency:** 360 Hz
+- **Annotations:** Beat-level annotation provided by cardiologists
 
 The model is trained on standard heartbeat categories (AAMI EC57 standard grouping):
 - N: Normal beat
@@ -34,26 +34,27 @@ NOTE: The dataset split is performed patient-wise to prevent data leakage.
 The proposed model is a 1D Convolutional Neural Network (CNN) designed for single-beat ECG classification.
 
 Each input consists of a 0.6-second heartbeat segment (216 samples) centered around the R-peak. The architecture includes:
+```
+Input: 1 × 216
 
-Input (1 × 216)
-│
-├── Conv1D (32 filters, kernel=7, padding=3)
-│   ├── BatchNorm1D
-│   ├── ReLU
-│   └── MaxPool1D (kernel=2)
-│
-├── Conv1D (64 filters, kernel=5, padding=2)
-│   ├── BatchNorm1D
-│   ├── ReLU
-│   └── MaxPool1D (kernel=2)
-│
-├── Conv1D (128 filters, kernel=3, padding=1)
-│   ├── BatchNorm1D
-│   └── ReLU
-│
-├── Global Average Pooling
-│
-└── Fully Connected Layer (128 → 4 classes)
+Conv1D(32, kernel=7, padding=3)
+BatchNorm1D
+ReLU
+MaxPool1D(2)
+
+Conv1D(64, kernel=5, padding=2)
+BatchNorm1D
+ReLU
+MaxPool1D(2)
+
+Conv1D(128, kernel=3, padding=1)
+BatchNorm1D
+ReLU
+
+Global Average Pooling
+
+Fully Connected (128 → 4)
+```
 
 The architecture focuses on morphological feature learning. The decreasing receptive field (7 -> 5 -> 3) enables hierarchical feature extraction allowing the network to first model waveform morphology (e.g., QRS complexes) and then refine localized temporal variations.
 
@@ -90,7 +91,7 @@ The model is evaluated on a held-out test set (patient-level split).
 ---
 
 ### Confusion matrix
-![Confusion Matrix](images/confusion_matrix.png)
+![Confusion Matrix](results/confusion_matrix.png)
 
 ## Key Insights
 - The model performs strongly on Normal (F1 = 0.83) and Fusion beats (F1 = 0.89), indicating robust feature extraction using 1D CNNs.
