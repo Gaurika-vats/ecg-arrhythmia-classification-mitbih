@@ -16,7 +16,8 @@ The model is trained on standard heartbeat categories (AAMI EC57 standard groupi
 - V: Ventricular ectopic beat
 - F: Fusion beat
 - Q: Unknown beat (removed during preprocessing)
-
+- 
+Although the dataset provides two ECG channels per record, this implementation uses only a single lead (MLII) for heartbeat classification.
 The dataset is not included in this repository. Users must download it directly from PhysioNet.
 
 ## Data Preprocessing
