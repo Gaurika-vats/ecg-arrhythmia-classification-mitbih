@@ -99,6 +99,7 @@ The model is evaluated on a held-out test set (patient-level split).
 - Ventricular ectopic beats achieve balanced performance (F1 = 0.63), showing reliable abnormal beat identification.
 - Supraventricular beats remain challenging (F1 = 0.06) due to morphological similarity with Normal beats and absence of rhythm context in single-beat modeling.
 - Patient-wise splitting ensures leakage-free and clinically meaningful performance assessment.
+- Although the overall accuracy is 72.96%, the Macro F1 score of 0.6026 highlights the impact of class imbalance. Macro F1 provides a more reliable evaluation metric than accuracy in this imbalanced medical classification setting.
   
 ## How to Run
 Run on Google Colab (Recommended)
