@@ -59,10 +59,6 @@ Standard random patient splits risk concentrating S-class beats (which are heavi
 
 No patient appears in more than one split. Zero overlap is verified programmatically via assertion checks.
 
-**Train class distribution:** N: 55,588 · S: 1,803 · V: 3,847 · F: 716
-
-**Test class distribution:** N: 20,827 · S: 574 · V: 2,062 · F: 692
-
 ### Class Imbalance Handling
 A `WeightedRandomSampler` is used during training with inverse-frequency class weights. Weights are capped at 10× the N-class weight to prevent over-firing on the smallest classes (uncapped, F-class would receive ~77× oversampling).
 
