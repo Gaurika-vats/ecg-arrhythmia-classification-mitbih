@@ -115,27 +115,27 @@ Evaluated on a held-out test set with strict patient-level separation.
 
 | Metric | Value |
 |---|---|
-| Overall Accuracy | 75.79% |
-| Macro F1 Score | 0.4998 |
+| Overall Accuracy | 84.28% |
+| Macro F1 Score | 0.5840 |
 
 ### Class-wise Performance
 
 | Class | Precision | Recall | F1 Score |
 |---|---|---|---|
-| N (Normal) | 0.9661 | 0.7523 | 0.8459 |
-| S (Supraventricular ectopic) | 0.1622 | 0.2422 | 0.1943 |
-| V (Ventricular ectopic) | 0.5508 | 0.9384 | 0.6942 |
-| F (Fusion) | 0.1581 | 0.8150 | 0.2649 |
+| N (Normal) | 0.9690 | 0.8490 | 0.9050 |
+| S (Supraventricular ectopic) | 0.2495 | 0.2021 | 0.2233 |
+| V (Ventricular ectopic) | 0.8143 | 0.9336 | 0.8699 |
+| F (Fusion) | 0.2070 | 0.9205 | 0.3379 |
 
 ### Confusion Matrix
 ![Confusion Matrix](results/confusion_matrix.png)
 
 ## Key Insights
 
-- **Normal beats (N)** achieve strong precision (0.966) reflecting the model's reliable identification of the dominant class.
-- **Ventricular beats (V)** achieve excellent recall (0.938), which is clinically significant as missed V-beats carry higher risk.
-- **Supraventricular beats (S)** remain the hardest class. Single-beat morphology alone is insufficient to distinguish S from N due to their visual similarity. Adding RR interval features improved S-class F1, the rhythm context (shorter pre-RR, near-compensatory post-RR) provides discriminating signal that morphology cannot.
-- **Macro F1 (0.499) is the primary reported metric** rather than overall accuracy (75.79%), as accuracy is misleading under class imbalance.
+- **Normal beats (N)** achieve strong precision (0.9690) reflecting the model's reliable identification of the dominant class.
+- **Ventricular beats (V)** achieve excellent recall (0.9336), which is clinically significant as missed V-beats carry higher risk.
+- **Supraventricular beats (S)** remain the hardest class. Single-beat morphology alone is insufficient to distinguish S from N due to their visual similarity. Adding RR interval features improved S-class F1 score, the rhythm context (shorter pre-RR, near-compensatory post-RR) provides discriminating signal that morphology cannot.
+- **Macro F1 (0.5840) is the primary reported metric** rather than overall accuracy (84.28%), as accuracy is misleading under class imbalance.
 - **Patient-wise stratified splitting** was critical: naive random patient splits concentrated S-heavy patients in a single partition. Explicit distribution of S-heavy patients (≥50 S-beats) across all splits produced more representative and reliable evaluation.
 - The performance ceiling for this architecture on this dataset is largely a **data constraint**: MIT-BIH contains only 48 patients, S-beats are concentrated in 2–3 patients, and patient-wise evaluation inherently limits generalization measurement.
 
